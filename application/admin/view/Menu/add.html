@@ -1,0 +1,119 @@
+{include file="Public/header"/}
+{include file="Public/navibar"/}
+{include file="Public/sidebar"/}
+
+<!--- START 以上内容不需更改，保证该TPL页内的标签匹配即可 --->
+
+{include file="Public/message"/}
+<!--- START 以上内容不需更改，保证该TPL页内的标签匹配即可 --->
+<style>
+    .thisform{
+        margin:20px 0px;
+        font-size:20px;
+    }
+    .thisform li{
+        margin:10px 0px;
+        list-style : none;
+        height:50px;
+    }
+    .thisform li .wz_qxgl_xl{
+        float:left;
+        margin:0px;
+    }
+    .thisform li label{
+        margin-right:20px;
+        display:block;
+        float:left;
+    }
+    .label  {
+        font-size:1px;
+        color:red;
+    }
+</style>
+
+<div class="well">
+
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane active in" id="home">
+
+            <form id="tab" method="post" action="">
+                <ul class="thisform">
+                    <li>
+                <label>名称</label>
+                <input type="text" name="menu_name" value="{$Request.post.menu_name}" class="input-xlarge right_nr_zhzgl_sr" required="true" autofocus="true">
+                    </li>
+                    <li>
+                <label>链接 <span class="label label-important">不可重复，以/开头的相对路径或者http网址</span></label>
+                <input type="text" name="menu_url" value="{$Request.post.menu_url}" class="input-xlarge right_nr_zhzgl_sr" placeholder="Index/index"  required="true" >
+                    </li>
+                    <li>
+                <label>所属模块</label>
+                        <div class="wz_qxgl_xl">
+                <select name="module_id" class="input-xlarge" id="DropDownTimezone">
+                {php}
+                    foreach($module_options_list as $k=>$val){
+                    echo " <option value='".$k."' class='input-xlarge option' id='DropDownTimezone-1'>".$val."</option>";
+                    }
+                {/php}
+                </select>
+                        </div>
+                    </li>
+                    <li>
+                <label>是否左侧菜单栏显示</label>
+                        <div class="wz_qxgl_xl">
+                <select name="is_show" class="input-xlarge" >
+                    <option value="1" selected >是</option>
+                    <option value="0">否</option>
+                </select>
+                            </div>
+                    </li>
+                    <li>
+                <label>所属菜单</label>
+                        <div class="wz_qxgl_xl">
+                <select name="father_menu" class="input-xlarge" id="DropDownTimezone">
+                        {php}
+                            foreach($father_menu_options_list as $k=>$val){
+                            if(is_array($val)){
+                            echo '<optgroup label="'.$k.'">';
+                            foreach($val as $key=>$v){
+                            echo '<option value="'.$key.'" class="input-xlarge option" id="DropDownTimezone-1-0">'.$v.'</option>';
+                            }
+                            echo '</optgroup>';
+                            }else{
+                                echo '<option value="'.$k.'" selected="selected" class="input-xlarge option" id="DropDownTimezone-0">'.$val.'</option>';
+                            }
+                            }
+                        {/php}
+                </select>
+                            </div>
+                    </li>
+                    <li>
+                <label>是否允许快捷菜单 <span class="label label-important">修改/ 删除类链接不允许</span></label>
+                        <div class="wz_qxgl_xl">
+                <select name="shortcut_allowed" class="input-xlarge" >
+                    <option value="1" selected>是</option>
+                    <option value="0">否</option>
+                </select>
+                            </div>
+                    </li>
+                    <li>
+                <label>排序 <span class="label label-important">填写数字</span></label>
+                <input type="text" name="sort" value="{$Request.post.sort}" class="input-xlarge right_nr_zhzgl_sr" placeholder="越大越靠前，默认0"  required="true" >
+                    </li>
+                    <li style="height:220px;">
+                <label>描述</label>
+                <textarea name="menu_desc" rows="3" class="input-xlarge right_nr_zhzgl_xl">{$Request.post.module_desc}</textarea>
+                    </li>
+                    <li >
+                <div class="dsjj_nr_menu">
+                    <input name="" type="submit" value="提交">
+                </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--- END 以下内容不需更改，请保证该TPL页内的标签匹配即可 --->
+{include file="Public/footer"/}

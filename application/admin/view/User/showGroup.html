@@ -1,0 +1,57 @@
+{include file="Public/header"/}
+{include file="Public/navibar"/}
+{include file="Public/sidebar"/}
+
+<!--- START 以上内容不需更改，保证该TPL页内的标签匹配即可 --->
+
+{include file="Public/message"/}
+<div class="block">
+    <div id="page-stats" class="block-body collapse in">
+        <table width="855" border="0" cellspacing="0" cellpadding="0" class="cpgl_cplb_bt">
+            <tr>
+                <td style="width:20px">#</td>
+                <td style="width:80px">登录名</td>
+                <td style="width:100px">姓名</td>
+                <td style="width:100px">手机</td>
+                <td style="width:80px">邮箱</td>
+                <td style="width:80px">登录时间</td>
+                <td style="width:80px">登录IP</td>
+                <td style="width:80px">描述</td>
+            </tr>
+        </table>
+        <table width="855" border="0" cellspacing="0" cellpadding="0" class="cpgl_cplb_nr">
+            {foreach name="user_infos" item="user_info"}
+            <tr>
+                <td>{$user_info.user_id}</td>
+                <td>{$user_info.user_name}</td>
+                <td>{$user_info.real_name}</td>
+                <td>{$user_info.mobile}</td>
+                <td>{$user_info.email}</td>
+                <td>{$user_info.login_time}</td>
+                <td>{$user_info.login_ip}</td>
+                <td>{$user_info.user_desc}</td>
+                <td>
+                    <a href="user_modify.php?user_id={$user_info.user_id}" title= "修改" ><i class="icon-pencil"></i></a>
+                    &nbsp;
+                    {if condition="$user_info['user_id'] neq 1"}
+                    {if condition="$user_info['status'] eq 1"}
+                    <a data-toggle="modal" href="#myModal"  title= "封停账号" ><i class="icon-pause" href="users.php?page_no={$Request.get.page}&method=pause&user_id={$user_info.user_id}"></i></a>
+                    {/if}
+                    {if condition="$user_info['status'] == 0"}
+                    <a data-toggle="modal" href="#myModal" title= "解封账号" ><i class="icon-play" href="users.php?page_no={$Request.get.page}&method=play&user_id={$user_info.user_id}"></i></a>
+                    {/if}
+                    &nbsp;
+                    <a data-toggle="modal" href="#myModal" title= "删除" ><i class="icon-remove" href="users.php?page_no={$Request.get.page}&method=del&user_id={$user_info.user_id}" ></i></a>
+                    {/if}
+                </td>
+            </tr>
+            {/foreach}
+        </table>
+        <!--- START 分页模板 --->
+        {$page_html}
+
+        <!--- END --->
+    </div>
+</div>
+<!--- END 以下内容不需更改，请保证该TPL页内的标签匹配即可 --->
+{include file="Public/footer"/}

@@ -1,0 +1,39 @@
+{include file="Public/header"/}
+{include file="Public/navibar"/}
+{include file="Public/sidebar"/}
+
+<!--- START 以上内容不需更改，保证该TPL页内的标签匹配即可 --->
+
+{include file="Public/message"/}
+
+<div class="cpgl_cplb">
+    <table width="855" border="0" cellspacing="0" cellpadding="0" class="cpgl_cplb_bt">
+        <tr>
+            <td width="265" height="60" align="center">#</td>
+            <td width="151" align="center">账号组名</td>
+            <td width="164" align="center">所有者</td>
+            <td width="136" align="center">描述</td>
+            <td width="139" align="center">操作</td>
+        </tr>
+    </table>
+    {foreach name="groups" item="group"}
+    <table width="855" border="0" cellspacing="0" cellpadding="0" class="cpgl_cplb_nr">
+        <tr>
+            <td width="265" height="48" align="center">{$group.group_id}</td>
+            <td width="151" align="center">{$group.group_name}</td>
+            <td width="164" align="center">{$group.owner_name}</td>
+            <td width="136" align="center">{$group.group_desc}</td>
+            <td width="139" align="center"><a href="{:url('User/showGroup?group_id='.$group.group_id)}"><img src="{$Think.config.PUBLIC}/Admin/images/zxj.jpg" width="31" height="27" /></a>&nbsp;&nbsp;&nbsp;
+                <a href="{:url('Group/edit?group_id='.$group.group_id)}"><img src="{$Think.config.PUBLIC}/Admin/images/cp_11.jpg" width="27" height="27" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a goto="{:url('Group/del?group_id='.$group.group_id)}" class="icon-remove"><img src="{$Think.config.PUBLIC}/Admin/images/cp_13.jpg" width="27" height="27" /></a></td>
+        </tr>
+    </table>
+    {/foreach}
+    <div class="intro_cxcp_nr_fy">{$page_html}</div>
+</div>
+</div>
+</div>
+
+
+
+    <!-- END 以下内容不需更改，请保证该TPL页内的标签匹配即可 -->
+    {include file="Public/footer"/}
