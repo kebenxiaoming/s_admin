@@ -14,7 +14,7 @@ class Login extends Base
         if(IS_POST){
             $verify=input('post.verify_code');
             //先检测验证码
-            if(!captcha_check($verify)){
+            if(captcha_check($verify)){
                 $username=input('post.user_name');
                 $password=input('post.password');
                 $remember=input('post.remember');
