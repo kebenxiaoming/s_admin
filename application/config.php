@@ -269,13 +269,5 @@ return [
         'Module' => '菜单模块',
         'MenuUrl' => '功能',
         'GroupRole' => '权限',
-        'QuickNote' => 'QuickNote',
-        'Category'=>'产品分类',
-        "Product"=>'产品',
-        "Dealer"=>'经销商',
-        "Designer"=>'设计师',
-        "Message"=>'消息',
-        "Article"=>'大赛简介',
-        "Work"=>'作品',
     ],
 ];
