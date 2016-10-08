@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2016-09-30 14:39:19
+Date: 2016-10-08 13:50:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,7 +39,7 @@ CREATE TABLE `darling_menu_url` (
 -- ----------------------------
 INSERT INTO `darling_menu_url` VALUES ('1', '首页', 'Index/index', '1', '0', '1', '1', '0', '后台首页', '0');
 INSERT INTO `darling_menu_url` VALUES ('2', '账号列表', 'User/index', '1', '1', '1', '1', '0', '账号列表', '0');
-INSERT INTO `darling_menu_url` VALUES ('3', '修改账号', 'User/modify', '1', '0', '1', '0', '0', '修改账号', '2');
+INSERT INTO `darling_menu_url` VALUES ('3', '修改账号', 'User/edit', '1', '0', '1', '0', '0', '修改账号', '2');
 INSERT INTO `darling_menu_url` VALUES ('4', '新建账号', 'User/add', '1', '0', '1', '1', '0', '新建账号', '2');
 INSERT INTO `darling_menu_url` VALUES ('5', '个人信息', 'User/profile', '1', '0', '1', '1', '0', '个人信息', '0');
 INSERT INTO `darling_menu_url` VALUES ('6', '账号组成员', 'User/showGroup', '1', '0', '1', '0', '0', '显示账号组详情及该组成员', '7');
@@ -112,10 +112,11 @@ CREATE TABLE `darling_sys_log` (
   PRIMARY KEY (`op_id`),
   KEY `op_time` (`op_time`),
   KEY `class_name` (`class_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=308 DEFAULT CHARSET=utf8 COMMENT='操作日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=311 DEFAULT CHARSET=utf8 COMMENT='操作日志表';
 
 -- ----------------------------
 -- Records of darling_sys_log
+-- ----------------------------
 INSERT INTO `darling_sys_log` VALUES ('283', 'admin', 'MODIFY', 'UserGroup', '4', '{\"group_id\":\"4\",\"group_role\":\"1,5,8,11\"}', '1475203109');
 INSERT INTO `darling_sys_log` VALUES ('284', 'admin', 'MODIFY', 'UserGroup', '4', '{\"group_id\":\"4\",\"group_role\":\"1,5,8\"}', '1475203115');
 INSERT INTO `darling_sys_log` VALUES ('285', 'admin', 'ADD', 'UserGroup', '1', '{\"group_name\":\"adf\",\"group_desc\":\"adfsa\",\"group_role\":\"1,5,17,18,22,23,24,25\",\"owner_id\":1}', '1475203599');
@@ -141,6 +142,9 @@ INSERT INTO `darling_sys_log` VALUES ('304', 'admin', 'MODIFY', 'MenuUrl', '117'
 INSERT INTO `darling_sys_log` VALUES ('305', 'admin', 'MODIFY', 'UserGroup', '1', '{\"group_name\":\"\\u8d85\\u7ea7\\u7ba1\\u7406\\u5458\\u7ec4\",\"group_desc\":\"\\u4e07\\u80fd\\u7684\\u4e0d\\u662f\\u795e\\uff0c\\u662f\\u7a0b\\u5e8f\\u5458bbb\",\"group_id\":1}', '1475216542');
 INSERT INTO `darling_sys_log` VALUES ('306', 'admin', 'MODIFY', 'UserGroup', '1', '{\"group_name\":\"\\u8d85\\u7ea7\\u7ba1\\u7406\\u5458\\u7ec4\",\"group_desc\":\"\\u4e07\\u80fd\\u7684\\u4e0d\\u662f\\u795e\\uff0c\\u662f\\u7a0b\\u5e8f\\u5458\\uff0c\\u54c8\\u54c8\\u54c8\",\"group_id\":1}', '1475216553');
 INSERT INTO `darling_sys_log` VALUES ('307', 'admin', 'ADD', 'UserGroup', '1', '{\"group_name\":\"\\u6d4b\\u8bd5\\u8d26\\u53f7\\u7ec4\",\"group_desc\":\"\\u5566\\u5566\\u5566\\u5566\",\"group_role\":\"1,5,17,18,22,23,24,25\",\"owner_id\":1}', '1475216632');
+INSERT INTO `darling_sys_log` VALUES ('308', 'admin', 'MODIFY', 'MenuUrl', '3', '{\"menu_name\":\"\\u4fee\\u6539\\u8d26\\u53f7\",\"menu_url\":\"User\\/edit\",\"module_id\":\"1\",\"is_show\":\"0\",\"father_menu\":\"2\",\"online\":\"1\",\"shortcut_allowed\":\"0\",\"sort\":\"0\",\"menu_desc\":\"\\u4fee\\u6539\\u8d26\\u53f7\",\"menu_id\":3}', '1475905662');
+INSERT INTO `darling_sys_log` VALUES ('309', 'admin', 'MODIFY', 'User', '1', '{\"user_id\":\"26\",\"user_name\":\"demo\",\"real_name\":\"sunny\",\"mobile\":\"15812345678\",\"email\":\"yuwenqi@osadmin.org\",\"user_desc\":\"\\u9ed8\\u8ba4\\u7528\\u6237\\u7ec4\\u6210\\u5458\",\"user_group\":\"1\"}', '1475905681');
+INSERT INTO `darling_sys_log` VALUES ('310', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475905772');
 
 -- ----------------------------
 -- Table structure for darling_user
@@ -157,7 +161,6 @@ CREATE TABLE `darling_user` (
   `login_time` int(11) DEFAULT NULL COMMENT '登录时间',
   `status` tinyint(4) NOT NULL DEFAULT '1',
   `login_ip` varchar(32) DEFAULT NULL,
-  `user_type` tinyint(1) NOT NULL COMMENT '用户类型：0：默认的管理员；1：经销商；2：设计师',
   `user_group` int(11) NOT NULL COMMENT ' 账号组：1:超级管理员；3：经销商管理；4：设计师',
   `template` varchar(32) NOT NULL DEFAULT 'default' COMMENT '主题模板',
   `shortcuts` text COMMENT '快捷菜单',
@@ -169,8 +172,8 @@ CREATE TABLE `darling_user` (
 -- ----------------------------
 -- Records of darling_user
 -- ----------------------------
-INSERT INTO `darling_user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'SomewhereYu', '13800138001', 'admin@osadmin.org', '初始的超级管理员!', '1475200159', '1', '192.168.18.130', '0', '1', 'schoolpainting', '10,105', '0');
-INSERT INTO `darling_user` VALUES ('26', 'demo', 'e10adc3949ba59abbe56e057f20f883e', 'SomewhereYu', '15812345678', 'yuwenqi@osadmin.org', '默认用户组成员', '1468824260', '1', '192.168.18.113', '0', '1', 'schoolpainting', '', '0');
+INSERT INTO `darling_user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'SomewhereYu', '13800138001', 'admin@osadmin.org', '初始的超级管理员!', '1475905772', '1', '192.168.18.130', '1', 'schoolpainting', '10,105', '0');
+INSERT INTO `darling_user` VALUES ('26', 'demo', 'e10adc3949ba59abbe56e057f20f883e', 'sunny', '15812345678', 'yuwenqi@osadmin.org', '默认用户组成员', '1468824260', '1', '192.168.18.113', '1', 'schoolpainting', '', '0');
 
 -- ----------------------------
 -- Table structure for darling_user_group
