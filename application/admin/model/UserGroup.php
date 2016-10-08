@@ -11,11 +11,6 @@ use think\Model;
 
 class UserGroup extends Model{
 
-    public function owner()
-    {
-        return $this->hasOne('User','owner_id',"user_id");
-    }
-
     public function getAllGroup(){
         $listobjarr=$this->select();
         if (!empty($listobjarr)) {
