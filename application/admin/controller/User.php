@@ -19,6 +19,9 @@ class User extends Base{
         }
         $this->assign("user_infos",$userlists);
         $this->assign("page_html",$user_infos->render());
+
+        $acjs=renderJsConfirm("icon-remove");
+        $this->assign("action_confirm",$acjs);
         return $this->fetch();
     }
 
@@ -104,6 +107,26 @@ class User extends Base{
             $group_option_list = model("GroupRole")->getGroupForOptions ();
             $this->assign ( 'group_option_list', $group_option_list );
             return $this->fetch();
+        }
+    }
+    //删除
+    public function del(){
+        $data['user_id']=intval(input('param.user_id'));
+        if($data['user_id']==1){
+            $this->error("禁止删除初始管理员！");die;
+        }
+        //先查找是否存在
+        $user=model("User")->where($data)->find();
+        if(empty($user)){
+            $this->error("不存在该用户！");die;
+        }
+        $res = model("User")->where($data)->delete();
+        if ($res) {
+            Adminlog(session("user")['user_name'],"DEL" , "User",$data['user_id'] ,json_encode($user) );
+            $this->success("删除成功！", url("User/index"));
+            die;
+        } else {
+            $this->error("删除失败！", url("User/index"));die;
         }
     }
 }
