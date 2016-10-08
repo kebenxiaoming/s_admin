@@ -21,7 +21,6 @@ class Base extends Controller
         define('IS_DELETE',     Request::instance()->isDelete());
         //查看是否存在记录cookie
         $user_id=getCookieRemember();
-
         if($user_id){
             //自动登录
             if(empty(session("user"))){
@@ -37,7 +36,10 @@ class Base extends Controller
                 $this->redirect("Login/index");
             }
         }else{
-            if($this->request->controller()=="Login"||$this->request->action()=="del"||$this->request->action()=="delete"||$this->request->action()=="category_del"){
+            //如果记录了cookie就让他直接进到index页面
+            if($this->request->controller()=="Login"&&$this->request->action()=="index"){
+                $this->redirect("Index/index");
+            }elseif($this->request->action()=="del"||$this->request->action()=="delete"||$this->request->action()=="category_del"){
                 //如果是退出直接不操作
             }else {
                 $this->assign("user_info", $user);
