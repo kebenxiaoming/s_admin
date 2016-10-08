@@ -13,41 +13,32 @@
         <div id="page-stats" class="block-body collapse in">
             <table width="855" border="0" cellspacing="0" cellpadding="0" class="cpgl_cplb_bt">
                 <tr>
-                    <td width="100" height="60" align="center">#</td>
+                    <td width="60" height="60" align="center">#</td>
                     <td width="111" align="center">用户名</td>
                     <td width="111" align="center">真名</td>
                     <td width="124" align="center">手机</td>
-                    <td width="106" align="center">邮箱</td>
                     <td width="109" align="center">登录时间</td>
                     <td width="100" align="center">登录IP</td>
                     <td width="100" align="center">Group#</td>
-                    <td width="100" align="center">描述</td>
+                    <td width="100" align="center">操作</td>
                 </tr>
             </table>
                 {foreach name="user_infos" item="user_info"}
                     <table width="855" border="0" cellspacing="0" cellpadding="0" class="cpgl_cplb_nr">
                 <tr>
-                    <td width="100" align="center">{$user_info.user_id}</td>
+                    <td width="60" align="center">{$user_info.user_id}</td>
                     <td width="111" align="center">{$user_info.user_name}</td>
                     <td width="124" align="center">{$user_info.real_name}</td>
                     <td width="100" align="center">{$user_info.mobile}</td>
-                    <td width="100" align="center">{$user_info.email}</td>
-                    <td width="100" align="center">{$user_info.login_time}</td>
+                    <td width="100" align="center">{$user_info.login_time|date="Y-m-d",###}</td>
                     <td width="100" align="center">{$user_info.login_ip}</td>
                     <td width="100" align="center">{$user_info.group_name}</td>
-                    <td width="100" align="center">{$user_info.user_desc}</td>
                     <td width="100" align="center">
-                        <a href="user_modify.php?user_id={$user_info.user_id}" title= "修改" ><i class="icon-pencil"></i></a>
+                        <a href="{:url('User/edit',array('user_id'=>$user_info['user_id']))}" title= "修改" >修改</a>
                         &nbsp;
                         {if condition="$user_info['user_id'] neq 1"}
-                        {if condition="$user_info['status'] eq 1"}
-                        <a data-toggle="modal" href="#myModal"  title= "封停账号" ><i class="icon-pause" href="users.php?page_no={$Request.get.page}&method=pause&user_id={$user_info.user_id}"></i></a>
-                        {/if}
-                        {if condition="$user_info['status'] == 0"}
-                        <a data-toggle="modal" href="#myModal" title= "解封账号" ><i class="icon-play" href="users.php?page_no={$Request.get.page}&method=play&user_id={$user_info.user_id}"></i></a>
-                        {/if}
-                        &nbsp;
-                        <a data-toggle="modal" href="#myModal" title= "删除" ><i class="icon-remove" href="users.php?page_no={$Request.get.page}&method=del&user_id={$user_info.user_id}" ></i></a>
+                        <a data-toggle="modal" href="#myModal" title= "删除" >
+                            <i class="icon-remove" goto="{:url('User/del',array('user_id'=>$user_info['user_id']))}" >删除</i></a>
                         {/if}
                     </td>
                 </tr>
