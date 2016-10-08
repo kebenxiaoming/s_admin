@@ -50,9 +50,7 @@ class Base extends Controller
                     $this->assign('content_header', $menu);
                     $this->assign('current_module_id', $menu['module_id']);
                     //验证用户权限
-                    if($this->request->controller()!="Area"&&$this->request->controller()!="File"){
-                        $this->checkAccess($menu, $user);
-                    }
+                    $this->checkAccess($menu, $user);
                 }
                 $this->assign('sidebar', $sidebar);
 
