@@ -246,7 +246,7 @@ return [
     ],
     "PUBLIC"=>"/public/static",
     
-    "SECRET"=>"haveaniceday",
+    "SECRET"=>"isonlyfordarling",
     //日志的解释配置
     "COMMAND_FOR_LOG" => [
         'SUCCESS' => '成功',
