@@ -41,7 +41,7 @@ class MenuUrl extends Model
     public function getMenuByRole($user_role,$online=1){
         $url_array = array();
 
-        $sql = "select * from " . config('DB_PREFIX') . "menu_url me," .  config('DB_PREFIX') . "module mo where me.menu_id in ($user_role) and me.online = $online and me.module_id = mo.module_id and mo.online = 1";
+        $sql = "select * from " .config('database.prefix'). "menu_url me," . config('database.prefix') . "module mo where me.menu_id in ($user_role) and me.online = $online and me.module_id = mo.module_id and mo.online = 1";
 
         $list=$this->db() ->query($sql);
 

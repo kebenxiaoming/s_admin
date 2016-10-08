@@ -245,7 +245,7 @@ return [
         'reset'    => true
     ],
     "PUBLIC"=>"/public/static",
-    "DB_PREFIX"=>"darling_",
+    
     "SECRET"=>"haveaniceday",
     //日志的解释配置
     "COMMAND_FOR_LOG" => [
