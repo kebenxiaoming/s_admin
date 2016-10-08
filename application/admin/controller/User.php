@@ -31,4 +31,79 @@ class User extends Base{
         }
         return $this->fetch();
     }
+
+    public function add(){
+        if(IS_POST) {
+            $user = model("User");
+            $data =input("post.");
+            //判断邮箱格式
+            $pattern = "/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i";
+            if(!preg_match($pattern,$data['email'] )){
+                $this->error("邮箱格式不正确，请重新输入！");
+            }
+            //判断手机号格式
+            if(!preg_match("/^0{0,1}(13[0-9]|15[7-9]|153|17[0-9]|156|18[0-9])[0-9]{8}$/",$data['mobile'])){
+                $this->error("手机号格式不正确，请重新输入！");
+            }
+            $data['password']=md5($data['password']);
+            $res = $user->save($data);
+            if ($res) {
+                Adminlog(session("user")['user_name'],"ADD" , "User",$res ,json_encode($data) );
+                $this->success("添加成功！", url("User/index"));
+                die;
+            } else {
+                $this->error("添加失败！", url("User/index"));
+                die;
+            }
+        }else{
+            $group_option_list = model("GroupRole")->getGroupForOptions ();
+            $this->assign ( 'group_option_list', $group_option_list );
+            return $this->fetch();
+        }
+    }
+
+    public function edit(){
+        if(IS_POST) {
+            $user = model("User");
+            $data =input("post.");
+            //判断邮箱格式
+            $pattern = "/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i";
+            if(!preg_match($pattern,$data['email'] )){
+                $this->error("邮箱格式不正确，请重新输入！");
+            }
+            //判断手机号格式
+            if(!preg_match("/^0{0,1}(13[0-9]|15[7-9]|153|17[0-9]|156|18[0-9])[0-9]{8}$/",$data['mobile'])){
+                $this->error("手机号格式不正确，请重新输入！");
+            }
+            if(!empty($data['password'])) {
+                $data['password'] = md5($data['password']);
+            }else{
+                unset($data['password']);
+            }
+            $res = $user->isUpdate(true)->save($data);
+            if ($res) {
+                Adminlog(session("user")['user_name'],"MODIFY" , "User",$res ,json_encode($data) );
+                $this->success("修改成功！", url("User/index"));
+                die;
+            } else {
+                $this->error("修改失败！", url("User/index"));
+                die;
+            }
+        }else{
+            $user_id=input("param.user_id");
+            if(empty($user_id)){
+                $this->error("未获取到用户id");die;
+            }
+            $user=model("User")->find($user_id);
+            if($user){
+                $userinfo=$user->toArray();
+            }else{
+                $this->error("未获取到用户信息！");die;
+            }
+            $this->assign("user",$userinfo);
+            $group_option_list = model("GroupRole")->getGroupForOptions ();
+            $this->assign ( 'group_option_list', $group_option_list );
+            return $this->fetch();
+        }
+    }
 }
