@@ -43,7 +43,7 @@ class Login extends Base
     public function logout(){
         //清空session和缓存
         session("user",null);
-        cookie("sunny_remember",null);
+        setcookie("sunny_remember",'');
         //跳转到登录页
         $this->redirect("Login/index");
     }
