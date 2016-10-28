@@ -10,10 +10,37 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2016-10-08 13:50:11
+Date: 2016-10-28 14:52:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for darling_file
+-- ----------------------------
+DROP TABLE IF EXISTS `darling_file`;
+CREATE TABLE `darling_file` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文件ID',
+  `name` char(50) NOT NULL DEFAULT '' COMMENT '原始文件名',
+  `savename` char(225) NOT NULL DEFAULT '' COMMENT '保存名称',
+  `savepath` char(225) NOT NULL DEFAULT '' COMMENT '文件保存路径',
+  `ext` char(5) NOT NULL DEFAULT '' COMMENT '文件后缀',
+  `mime` char(40) NOT NULL DEFAULT '' COMMENT '文件mime类型',
+  `size` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '文件大小',
+  `md5` char(32) NOT NULL DEFAULT '' COMMENT '文件md5',
+  `sha1` char(40) NOT NULL DEFAULT '' COMMENT '文件 sha1编码',
+  `location` varchar(500) NOT NULL DEFAULT '0' COMMENT '文件保存位置',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '远程地址',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上传时间',
+  `ossres` varchar(255) DEFAULT NULL COMMENT 'oss返回的完整文件路径',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文件表';
+
+-- ----------------------------
+-- Records of darling_file
+-- ----------------------------
+INSERT INTO `darling_file` VALUES ('1', '1269fa1fa7.jpg', 'ee0fade7f8b08cbc62e162eedcce0e7e.jpg', '20161028\\ee0fade7f8b08cbc62e162eedcce0e7e.jpg', 'jpg', 'image/jpeg', '768774', 'baf46c63d1d09ea3ab613f73736bec1c', '210557ead1ba77b7a9faec5bfd4b2214c7244489', 'D:\\wamp64\\www\\s_admin\\public\\uploads\\20161028\\ee0fade7f8b08cbc62e162eedcce0e7e.jpg', '', '1477637230', null);
+INSERT INTO `darling_file` VALUES ('2', '1.jpg', 'a1d0f4998e1d5010257bc70505f418ee.jpg', '20161028\\a1d0f4998e1d5010257bc70505f418ee.jpg', 'jpg', 'image/jpeg', '151855', '0e6dda7cd91063966caf0baf1b80f659', '434d2b487044b05687d0b126c8c0e04e04ea750a', 'D:\\wamp64\\www\\s_admin\\public\\uploads\\20161028\\a1d0f4998e1d5010257bc70505f418ee.jpg', '', '1477637490', null);
 
 -- ----------------------------
 -- Table structure for darling_menu_url
@@ -32,7 +59,7 @@ CREATE TABLE `darling_menu_url` (
   `father_menu` int(11) NOT NULL DEFAULT '0' COMMENT '上一级菜单',
   PRIMARY KEY (`menu_id`),
   UNIQUE KEY `menu_url` (`menu_url`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='功能链接（菜单链接）';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='功能链接（菜单链接）';
 
 -- ----------------------------
 -- Records of darling_menu_url
@@ -59,7 +86,8 @@ INSERT INTO `darling_menu_url` VALUES ('20', '登入', 'Login/index', '1', '0', 
 INSERT INTO `darling_menu_url` VALUES ('21', '操作记录', 'Syslog/index', '1', '1', '1', '1', '2', '用户操作的历史行为', '0');
 INSERT INTO `darling_menu_url` VALUES ('22', '系统信息', 'System/index', '1', '1', '1', '1', '0', '显示系统相关信息', '0');
 INSERT INTO `darling_menu_url` VALUES ('23', '文件上传', 'File/upload', '8', '1', '1', '1', '1', '文件上传控制', '0');
-INSERT INTO `darling_menu_url` VALUES ('24', '测试列表', 'Test/index', '8', '1', '1', '1', '0', '呵呵呵', '0');
+INSERT INTO `darling_menu_url` VALUES ('24', '测试列表', 'Test/index', '8', '1', '1', '1', '1', '呵呵呵', '0');
+INSERT INTO `darling_menu_url` VALUES ('25', '测试1', 'Test/aa', '8', '1', '1', '1', '0', 'aaaaa', '0');
 
 -- ----------------------------
 -- Table structure for darling_module
@@ -112,7 +140,7 @@ CREATE TABLE `darling_sys_log` (
   PRIMARY KEY (`op_id`),
   KEY `op_time` (`op_time`),
   KEY `class_name` (`class_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=311 DEFAULT CHARSET=utf8 COMMENT='操作日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=338 DEFAULT CHARSET=utf8 COMMENT='操作日志表';
 
 -- ----------------------------
 -- Records of darling_sys_log
@@ -145,6 +173,33 @@ INSERT INTO `darling_sys_log` VALUES ('307', 'admin', 'ADD', 'UserGroup', '1', '
 INSERT INTO `darling_sys_log` VALUES ('308', 'admin', 'MODIFY', 'MenuUrl', '3', '{\"menu_name\":\"\\u4fee\\u6539\\u8d26\\u53f7\",\"menu_url\":\"User\\/edit\",\"module_id\":\"1\",\"is_show\":\"0\",\"father_menu\":\"2\",\"online\":\"1\",\"shortcut_allowed\":\"0\",\"sort\":\"0\",\"menu_desc\":\"\\u4fee\\u6539\\u8d26\\u53f7\",\"menu_id\":3}', '1475905662');
 INSERT INTO `darling_sys_log` VALUES ('309', 'admin', 'MODIFY', 'User', '1', '{\"user_id\":\"26\",\"user_name\":\"demo\",\"real_name\":\"sunny\",\"mobile\":\"15812345678\",\"email\":\"yuwenqi@osadmin.org\",\"user_desc\":\"\\u9ed8\\u8ba4\\u7528\\u6237\\u7ec4\\u6210\\u5458\",\"user_group\":\"1\"}', '1475905681');
 INSERT INTO `darling_sys_log` VALUES ('310', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475905772');
+INSERT INTO `darling_sys_log` VALUES ('311', 'admin', 'DEL', 'User', '26', '{\"user_id\":26,\"user_name\":\"demo\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"real_name\":\"sunny\",\"mobile\":\"15812345678\",\"email\":\"yuwenqi@osadmin.org\",\"user_desc\":\"\\u9ed8\\u8ba4\\u7528\\u6237\\u7ec4\\u6210\\u5458\",\"login_time\":1468824260,\"status\":1,\"login_ip\":\"192.168.18.113\",\"user_group\":1,\"template\":\"schoolpainting\",\"shortcuts\":\"\",\"show_quicknote\":0}', '1475906111');
+INSERT INTO `darling_sys_log` VALUES ('312', 'admin', 'ADD', 'User', '1', '{\"user_name\":\"sunny\",\"password\":\"96e79218965eb72c92a549dd5a330112\",\"real_name\":\"kebenxiaoming\",\"mobile\":\"15866863307\",\"email\":\"xiaoyao_xiao@126.com\",\"user_desc\":\"lalallal\",\"user_group\":\"1\"}', '1475906230');
+INSERT INTO `darling_sys_log` VALUES ('313', 'sunny', 'LOGIN', 'User', '38', '{\"IP\":\"192.168.18.130\"}', '1475906254');
+INSERT INTO `darling_sys_log` VALUES ('314', 'sunny', 'MODIFY', 'User', '1', '{\"user_id\":\"38\",\"user_name\":\"sunny\",\"real_name\":\"kebenxiaoming\",\"mobile\":\"15866863307\",\"email\":\"xiaoyao_xiao@126.com\",\"user_desc\":\"lalallal\",\"user_group\":\"5\"}', '1475906325');
+INSERT INTO `darling_sys_log` VALUES ('315', 'sunny', 'LOGIN', 'User', '38', '{\"IP\":\"192.168.18.130\"}', '1475906419');
+INSERT INTO `darling_sys_log` VALUES ('316', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475906434');
+INSERT INTO `darling_sys_log` VALUES ('317', 'admin', 'MODIFY', 'MenuUrl', '24', '{\"menu_name\":\"\\u6d4b\\u8bd5\\u5217\\u8868\",\"menu_url\":\"Test\\/index\",\"module_id\":\"8\",\"is_show\":\"1\",\"father_menu\":\"0\",\"online\":\"1\",\"sort\":\"1\",\"menu_desc\":\"\\u5475\\u5475\\u5475\",\"menu_id\":24}', '1475907403');
+INSERT INTO `darling_sys_log` VALUES ('318', 'admin', 'ADD', 'MenuUrl', '1', '{\"menu_name\":\"\\u6d4b\\u8bd51\",\"menu_url\":\"Test\\/aa\",\"module_id\":\"8\",\"is_show\":\"1\",\"father_menu\":\"0\",\"sort\":\"0\",\"menu_desc\":\"aaaaa\"}', '1475907461');
+INSERT INTO `darling_sys_log` VALUES ('319', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475908095');
+INSERT INTO `darling_sys_log` VALUES ('320', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475908222');
+INSERT INTO `darling_sys_log` VALUES ('321', 'admin', 'MODIFY', 'User', '1', '{\"user_id\":\"38\",\"user_name\":\"sunny\",\"real_name\":\"kebenxiaoming\",\"mobile\":\"15866863307\",\"email\":\"xiaoyao_xiao@126.com\",\"user_desc\":\"lalallal1111\",\"user_group\":\"5\"}', '1475914886');
+INSERT INTO `darling_sys_log` VALUES ('322', 'admin', 'MODIFY', 'User', '1', '{\"user_id\":\"1\",\"user_name\":\"admin\",\"real_name\":\"SomewhereYu\",\"mobile\":\"13800138001\",\"email\":\"admin@osadmin.org\",\"user_desc\":\"\\u521d\\u59cb\\u7684\\u8d85\\u7ea7\\u7ba1\\u7406\\u5458!\",\"user_group\":\"5\"}', '1475917866');
+INSERT INTO `darling_sys_log` VALUES ('323', 'admin', 'MODIFY', 'User', '1', '{\"user_id\":\"1\",\"user_name\":\"admin\",\"real_name\":\"SomewhereYu\",\"mobile\":\"13800138001\",\"email\":\"admin@osadmin.org\",\"user_desc\":\"\\u521d\\u59cb\\u7684\\u8d85\\u7ea7\\u7ba1\\u7406\\u5458!\",\"user_group\":\"1\"}', '1475917870');
+INSERT INTO `darling_sys_log` VALUES ('324', 'admin', 'MODIFY', 'User', '1', '{\"user_id\":\"38\",\"user_name\":\"sunny\",\"real_name\":\"kebenxiaoming\",\"mobile\":\"15866863307\",\"email\":\"xiaoyao_xiao@126.com\",\"user_desc\":\"lalallal1111\",\"user_group\":\"3\"}', '1475917957');
+INSERT INTO `darling_sys_log` VALUES ('325', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475918776');
+INSERT INTO `darling_sys_log` VALUES ('326', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475918796');
+INSERT INTO `darling_sys_log` VALUES ('327', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475919208');
+INSERT INTO `darling_sys_log` VALUES ('328', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475919254');
+INSERT INTO `darling_sys_log` VALUES ('329', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475919307');
+INSERT INTO `darling_sys_log` VALUES ('330', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475979133');
+INSERT INTO `darling_sys_log` VALUES ('331', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475979168');
+INSERT INTO `darling_sys_log` VALUES ('332', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475979202');
+INSERT INTO `darling_sys_log` VALUES ('333', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1475979495');
+INSERT INTO `darling_sys_log` VALUES ('334', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1476064693');
+INSERT INTO `darling_sys_log` VALUES ('335', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1476086906');
+INSERT INTO `darling_sys_log` VALUES ('336', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.130\"}', '1476780988');
+INSERT INTO `darling_sys_log` VALUES ('337', 'admin', 'LOGIN', 'User', '1', '{\"IP\":\"192.168.18.134\"}', '1477633952');
 
 -- ----------------------------
 -- Table structure for darling_user
@@ -167,13 +222,13 @@ CREATE TABLE `darling_user` (
   `show_quicknote` int(11) NOT NULL DEFAULT '0' COMMENT '是否显示quicknote',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_name` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='后台用户';
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='后台用户';
 
 -- ----------------------------
 -- Records of darling_user
 -- ----------------------------
-INSERT INTO `darling_user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'SomewhereYu', '13800138001', 'admin@osadmin.org', '初始的超级管理员!', '1475905772', '1', '192.168.18.130', '1', 'schoolpainting', '10,105', '0');
-INSERT INTO `darling_user` VALUES ('26', 'demo', 'e10adc3949ba59abbe56e057f20f883e', 'sunny', '15812345678', 'yuwenqi@osadmin.org', '默认用户组成员', '1468824260', '1', '192.168.18.113', '1', 'schoolpainting', '', '0');
+INSERT INTO `darling_user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'SomewhereYu', '13800138001', 'admin@osadmin.org', '初始的超级管理员!', '1477633951', '1', '192.168.18.134', '1', 'schoolpainting', '10,105', '0');
+INSERT INTO `darling_user` VALUES ('38', 'sunny', '96e79218965eb72c92a549dd5a330112', 'kebenxiaoming', '15866863307', 'xiaoyao_xiao@126.com', 'lalallal1111', '1475906419', '1', '192.168.18.130', '3', 'default', null, '0');
 
 -- ----------------------------
 -- Table structure for darling_user_group

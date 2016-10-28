@@ -39,7 +39,7 @@ class File extends SplFileObject
     public function __construct($filename, $mode = 'r')
     {
         parent::__construct($filename, $mode);
-        $this->filename = $this->getRealPath();
+        $this->filename = $this->getRealPath() ?: $this->getPathname();
     }
 
     /**
@@ -402,5 +402,10 @@ class File extends SplFileObject
     public function getError()
     {
         return $this->error;
+    }
+
+    public function __call($method, $args)
+    {
+        return $this->hash($method);
     }
 }

@@ -34,7 +34,7 @@ trait Jump
      * @param array     $header 发送的Header信息
      * @return void
      */
-    protected function success($msg = '', $url = null, $data = '', $wait = 1, array $header = [])
+    protected function success($msg = '', $url = null, $data = '', $wait = 3, array $header = [])
     {
         $code = 1;
         if (is_numeric($msg)) {
