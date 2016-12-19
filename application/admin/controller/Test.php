@@ -12,4 +12,8 @@ class Test extends Base{
     public function index(){
         return "Hello Tp5";
     }
+
+    public function hello($id){
+        echo $id;
+    }
 }

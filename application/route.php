@@ -10,12 +10,8 @@
 // +----------------------------------------------------------------------
 
 return [
-    '__pattern__' => [
-        'name' => '\w+',
+    //路由分组,相当于下面的每个数组的key值都带上test,就如/:id加上test成为test/:id这样
+    '[test]'     => [
+        '/:id'   => ['Test/hello', ['method' => 'get'], ['id' => '\d+']],
     ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
-
 ];
