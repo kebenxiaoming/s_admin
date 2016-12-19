@@ -42,13 +42,13 @@ class Group extends Base{
             }else{
                 $data=input("post.");
                 $data['group_id']=$group_id;
-                $result = model("UserGroup")->isUpdate(true)->save($data);
-
-                if ($result>=0) {
+                $usergroup=model("UserGroup");
+                $result = $usergroup->validate(true)->isUpdate(true)->save($data);
+                if (false===$result) {
+                    $this->error($usergroup->getError());die;
+                }else{
                     Adminlog(session("user")['user_name'],"MODIFY" , "UserGroup",$group_id ,json_encode($data) );
                     $this->success( '账号组修改完成',url("Group/index"));die;
-                } else {
-                    $this->error( '修改过程出现错误！',url("Group/index"));die;
                 }
             }
         }
@@ -143,12 +143,13 @@ class Group extends Base{
                 $data['group_desc']=$group_desc;
                 $data['group_role']="1,5,17,18,22,23,24,25";
                 $data['owner_id']=session("user")['user_id'];
-                $result = model("UserGroup")->save($data);
-                if ($result>=0) {
+                $usergroup=model('UserGroup');
+                $result = $usergroup->validate(true)->save($data);
+                if (false==$result) {
+                    $this->error( $usergroup->getError());die;
+                }else{
                     Adminlog(session("user")['user_name'],"ADD" , "UserGroup",$result ,json_encode($data) );
                     $this->success( '新增账号组成功',url("Group/index"));die;
-                } else {
-                    $this->error( '新增账号组出错！',url("Group/index"));die;
                 }
             }
         }
