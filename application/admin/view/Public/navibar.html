@@ -2,8 +2,8 @@
   <div id="header">
       <table width="1200" border="0" cellspacing="0" cellpadding="0" class="header_nr">
           <tr>
-              <td height="69"><img src="{$Think.config.PUBLIC}/Admin/images/sy_03.jpg" width="53" height="23" /><a href="/admin">首页</a></td>
-              <td align="right">欢迎，<a href="{:url('User/edit',array('user_id'=>$user_info['user_id']))}">{$user_info.user_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/logout">退出</a></td>
+              <td height="69"><img src="{$Think.config.PUBLIC}/Admin/images/sy_03.jpg" width="53" height="23" /><a href="/public/admin">首页</a></td>
+              <td align="right">欢迎，<a href="{:url('User/edit',array('user_id'=>$user_info['user_id']))}">{$user_info.user_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{Url link='Login/logout'}">退出</a></td>
           </tr>
       </table>
   </div>
