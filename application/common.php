@@ -47,8 +47,8 @@ function setCookieRemember($encrypted,$day=7){
 }
 
 function getCookieRemember(){
-    if(!empty(cookie('sunny_remember'))) {
-        $encrypted = cookie("sunny_remember");
+    $encrypted = cookie("sunny_remember");
+    if(!empty($encrypted)) {
         $base64 = urldecode($encrypted);
         return decrypt($base64);
     }else{
