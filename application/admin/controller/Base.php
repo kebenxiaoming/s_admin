@@ -21,15 +21,15 @@ class Base extends Controller
         define('IS_DELETE',     Request::instance()->isDelete());
         //查看是否存在记录cookie
         $user_id=getCookieRemember();
+        //判断用户是否登录，已经登录直接进入页面内
+        $user=session("user");
         if($user_id){
             //自动登录
-            if(empty(session("user"))){
+            if(empty($user)){
                 model("User")->autoLogin($user_id);
             }
         }
         $this->request=Request::instance();
-        //判断用户是否登录，已经登录直接进入页面内
-        $user=session("user");
         if(empty($user)){
             //如果没登录自动跳转到登录页面
             if($this->request->controller()!="Login") {
