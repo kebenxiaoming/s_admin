@@ -8,7 +8,6 @@
  */
 namespace app\admin\controller;
 
-
 class Group extends Base{
     //分组列表管理
     public function index(){

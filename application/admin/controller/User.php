@@ -8,7 +8,6 @@
  */
 namespace app\admin\controller;
 
-use think\Request;
 class User extends Base{
     public function index(){
         $listrows=config("LISTROWS")?config("LISTROWS"):10;

@@ -7,8 +7,8 @@
  * Time: 15:02
  */
 namespace app\admin\model;
-use think\Model;
 
+use think\Model;
 class GroupRole extends Model{
     
     Protected $autoCheckFields = false;

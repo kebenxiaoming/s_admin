@@ -244,9 +244,11 @@ return [
         // 验证成功后是否重置
         'reset'    => true
     ],
+
     "PUBLIC"=>"/public/static",
-    
+
     "SECRET"=>"isonlyfordarling",
+
     //日志的解释配置
     "COMMAND_FOR_LOG" => [
         'SUCCESS' => '成功',
@@ -260,8 +262,8 @@ return [
         'PLAY' => '解封',
         'DEL' => '删除',
     ],
-    //模型
 
+    //模型
     "CLASS_FOR_LOG" => [
         'ALL' => '全部',
         'User' => '用户',

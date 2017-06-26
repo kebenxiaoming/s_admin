@@ -7,9 +7,9 @@
  * Time: 17:41
  */
 namespace app\admin\model;
-use think\Model;
 
-class File extends model{
+use think\Model;
+class File extends Model{
     public function upload(){
         // 获取表单上传文件 例如上传了001.jpg
         $file = request()->file('image');

@@ -7,8 +7,8 @@
  * Time: 9:40
  */
 namespace app\admin\model;
-use think\Model;
 
+use think\Model;
 class SysLog extends Model{
     
 }

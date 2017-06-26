@@ -7,6 +7,7 @@
  * Time: 9:07
  */
 namespace app\admin\validate;
+
 use think\Validate;
 class UserGroup extends Validate
 {

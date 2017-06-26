@@ -7,8 +7,8 @@
  * Time: 9:59
  */
 namespace app\admin\model;
-use think\Model;
 
+use think\Model;
 class User extends Model{
 
     protected $pk = 'user_id';

@@ -9,7 +9,6 @@
 namespace app\admin\model;
 
 use think\Model;
-
 class MenuUrl extends Model
 {
     //获取当前用户所有的菜单

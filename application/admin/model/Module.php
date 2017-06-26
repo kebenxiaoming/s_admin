@@ -9,7 +9,6 @@
 namespace app\admin\model;
 
 use think\Model;
-
 class Module extends Model{
     //列表
     public function getAllModules($is_online=null) {

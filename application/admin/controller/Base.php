@@ -7,9 +7,9 @@
  * Time: 11:53
  */
 namespace app\admin\controller;
+
 use think\Controller;
 use think\Request;
-
 class Base extends Controller
 {
     protected $request;

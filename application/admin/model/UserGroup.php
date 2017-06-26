@@ -7,8 +7,8 @@
  * Time: 15:06
  */
 namespace app\admin\model;
-use think\Model;
 
+use think\Model;
 class UserGroup extends Model{
 
     public function getAllGroup(){
